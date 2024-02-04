@@ -8,8 +8,8 @@ function HandwrittenNotes() {
   const [receivedPdfUrl, setReceivedPdfUrl] = useState(null);
 
   useEffect(() => {
-    document.title =  "Handwritten Notes Converter - LLM";
-  }, [])
+    document.title = "Handwritten Notes Converter - LLM";
+  }, []);
 
   const handleFileChange = (event) => {
     // Handle file selection
@@ -36,6 +36,7 @@ function HandwrittenNotes() {
         }
       );
 
+      console.log(response);
       // Create a Blob from the response data
       const pdfBlob = new Blob([response.data], { type: "application/pdf" });
 
@@ -91,18 +92,7 @@ function HandwrittenNotes() {
         </div>
       )}
 
-      {/* Render received PDF */}
-      {receivedPdfUrl && (
-        <div>
-          <h2 className="text-xl font-bold mt-4">Received PDF:</h2>
-          <embed
-            src={receivedPdfUrl}
-            type="application/pdf"
-            width="100%"
-            height="600px"
-          />
-        </div>
-      )}
+      
     </div>
   );
 }
