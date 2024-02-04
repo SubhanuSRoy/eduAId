@@ -105,7 +105,7 @@ function AddClassInsights() {
       formData.append("transcript", file);
 
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}llm/generate_class_insights/${student._id}`,
+        `${process.env.REACT_APP_BACKEND_URL}llm/generate_class_insights/${classId}`,
         formData
       );
 
