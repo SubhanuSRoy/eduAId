@@ -84,34 +84,13 @@ function ViewStudent() {
     }
   };
 
-  const fetchClasses = async () => {
-    console.log("Fetching Classes...");
-    try {
-      const studentId = student._id;
 
-      // Make a GET request to your backend endpoint to fetch the Classes data
-      const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}classes/get_classes/${studentId}`
-      );
-
-      // Assuming res.data is an array of Classes objects
-      const fetchedClasses = res.data;
-
-      // Update the studyPlan state with the fetched data
-      setClasses(fetchedClasses);
-
-      console.log("Classes fetched successfully:", fetchedClasses);
-    } catch (error) {
-      console.error("Error fetching Classes:", error);
-      // Handle errors as needed
-    }
-  };
 
   const effectRan = useRef(false);
   useEffect(() => {
     if (!effectRan.current) {
       fetchStudentData();
-      fetchClasses();
+ 
     }
 
     return () => (effectRan.current = true);
@@ -242,7 +221,8 @@ function ViewStudent() {
             </Link>
           </div>
 
-          {/* Display study plan */}
+          {/* Display study plan after checking if its an object */}
+          
           {studyPlan && (
             <details className="mt-4 ">
               <summary className=" text-3xl font-bold pb-1">

@@ -78,7 +78,7 @@ function AddClassInsights() {
   const getClassInsights = async (classId) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}classes/get_class_insights/${classId}`
+        `${process.env.REACT_APP_BACKEND_URL}llm/generate_class_insights/${classId}`
       );
       const classInsight = response.data.class_insight;
       // Update classInsights state with the fetched data
