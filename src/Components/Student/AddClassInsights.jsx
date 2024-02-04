@@ -78,7 +78,7 @@ function AddClassInsights() {
   const getClassInsights = async (classId) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}llm/generate_class_insights/${classId}`
+        `${process.env.REACT_APP_BACKEND_URL}classes/get_class_insights/${classId}`
       );
       const classInsight = response.data.class_insight;
       // Update classInsights state with the fetched data
@@ -99,6 +99,7 @@ function AddClassInsights() {
   };
 
   const handleUploadFile = async (classId, file) => {
+    console.log("handling file upload");
     try {
       const formData = new FormData();
       formData.append("transcript", file);
@@ -195,7 +196,7 @@ function AddClassInsights() {
                 </div>
                 
                 {!classInsights[classItem._id] ? (
-                  <div className="mt-2">
+                  <form className="mt-2">
                     <input
                       type="file"
                       onChange={(e) =>
@@ -203,12 +204,12 @@ function AddClassInsights() {
                       }
                     />
                     <button
-                      onClick={() => getClassInsights(classItem._id)}
+                      type="submit"
                       className="bg-primary px-3 py-2 rounded-md text-gray-50 hover:bg-primHover"
                     >
                       Upload Transcript
                     </button>
-                  </div>
+                  </form>
                 ) : null}
                 {classInsights[classItem._id] && (
                   <details className="mt-2">
