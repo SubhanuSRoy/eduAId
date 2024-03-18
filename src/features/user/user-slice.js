@@ -5,14 +5,17 @@ const userSlice = createSlice({
   initialState: {
     isLoggedIn: false,
     userType: null,
-    password: null,
-    empID: null,
+    user: null,
     rTabNo: 0
   },
   reducers: {
+    addUser(state, action) {
+      state.user = action.payload;
+      state.isLoggedIn = true;
+    },
     login(state,action) {
       state.isLoggedIn = true;
-      state.empID = action.payload.empID;
+      state.user = action.payload.user;
       state.userType = action.payload.userType;
     },
     logout(state) {

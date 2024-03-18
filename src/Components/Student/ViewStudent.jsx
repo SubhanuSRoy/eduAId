@@ -4,9 +4,13 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { studentActions } from "../../features/student/student-slice";
 import Markdown from "react-markdown";
+import { api } from "../../convex/_generated/api";
+import { useMutation } from "convex/react";
 
 function ViewStudent() {
   const dispatch = useDispatch();
+  const addNewClass = useMutation(api.classes.classes.addNewClass);
+  const addStudyPlan = useMutation(api.students.students.addStudyPlan);
   const [transcriptFile, setTranscriptFile] = useState(null);
 
   const [temporaryClassTopics, setTemporaryClassTopics] = useState({});
@@ -68,7 +72,6 @@ function ViewStudent() {
   useEffect(() => {
     document.title = "View Student " + student.name;
   }, []);
-
   const fetchStudentData = async () => {
     try {
       const response = await axios.get(
@@ -95,7 +98,6 @@ function ViewStudent() {
 
     return () => (effectRan.current = true);
   }, []);
-
   const handleFileChange = (e) => {
     setTranscriptFile(e.target.files[0]);
   };
@@ -118,7 +120,8 @@ function ViewStudent() {
         formData,
         response.data
       );
-      const updatedStudyPlan = response.data.study_plan; // Update with the actual field in the response
+      const updatedStudyPlan = response?.data?.study_plan; // Update with the actual field in the response
+      // addStudyPlan({ id: student._id, study_plan: updatedStudyPlan });
       setStudyPlan(updatedStudyPlan);
     } catch (error) {
       console.error("Error submitting transcript file:", error);
@@ -146,6 +149,11 @@ function ViewStudent() {
           class_number: classNo,
         }
       );
+      const addedClass = await addNewClass({
+        student_id: studentId,
+        class_topic: newTopic,
+        class_number: classNo,
+      });
       alert("Class added with topic: " + res.data.class_topic);
     } catch (error) {
       console.error("Error adding class:", error);
@@ -222,7 +230,7 @@ function ViewStudent() {
           </div>
 
           {/* Display study plan after checking if its an object */}
-          
+
           {studyPlan && (
             <details className="mt-4 ">
               <summary className=" text-3xl font-bold pb-1">
@@ -280,12 +288,12 @@ function ViewStudent() {
                 {studyPlan}
               </Markdown> */}
               <div className="grid grid-cols-3 gap-4 mt-4">
-                {studyPlan.map((classInfo, index) => (
+                {studyPlan?.map((classInfo, index) => (
                   <div
                     key={index}
                     className="border p-4 flex flex-col items-center"
                   >
-                    <div className="font-bold mb-2">{classInfo.class_no}</div>
+                    <div className="font-bold mb-2">Class {index+1}</div>
                     <input
                       className="mb-2 text-boxdark px-2 py-1 rounded-sm"
                       value={

@@ -2,30 +2,36 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { teacherActions } from "../../features/teacher/teacher-slice";
 import axios from "axios";
+import { useMutation, useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
 
 function Profile() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.currentUser);
   const teacher = useSelector((state) => state.teacher.currentTeacher);
+
+  //convex
+  const addNewTeacher = useMutation(api.teachers.teachers.addNewTeacher);
+  const updateTeacher = useMutation(api.teachers.teachers.updateTeacher);
+  const getTeacherByEmail = useQuery(api.teachers.teachers.getTeacherByEmail);
 
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    grade: "",
-    course: "",
     contact_number: "",
     subjects_taught: "",
     grade_levels: "",
-    years_of_experience: "",
+    years_of_experience: 0,
     short_bio: "",
     teaching_methods: "",
     qualifications: "",
   });
 
   useEffect(() => {
-    document.title =  "Add Teacher Profile";
-  }, [])
+    document.title = "Add Teacher Profile";
+  }, []);
 
   const effectRan = useRef(false);
 
@@ -48,10 +54,11 @@ function Profile() {
       try {
         const response = await axios.get(
           process.env.REACT_APP_BACKEND_URL + "teacher/get_latest_teacher/"
-        ); 
+        );
         console.log(response);
         const teacherData = response.data; // Assuming the response contains teacher details
         dispatch(teacherActions.addTeacher(teacherData));
+        setFormData(response.data);
       } catch (error) {
         console.error("Error fetching teacher data:", error);
       }
@@ -76,12 +83,16 @@ function Profile() {
     e.preventDefault();
     try {
       // Make an API call to update the teacher profile
+
+      // console.log("Adding new teacher profile:", formData);
+      const addedTeacher = await addNewTeacher(formData);
       const response = await axios.post(
         process.env.REACT_APP_BACKEND_URL + "teacher/add_teacher/",
         formData
       );
-      const updatedTeacher = response.data; // Assuming the response contains updated teacher details
-      dispatch(teacherActions.addTeacher(updatedTeacher));
+      // console.log("Teacher added successfully:", await addNewTeacher(formData));
+      dispatch(teacherActions.addTeacher(response.data));
+
       setLoading(false);
       alert("Teacher profile updated successfully");
     } catch (error) {
@@ -199,7 +210,7 @@ function Profile() {
             Years of Experience
           </label>
           <input
-            type="text"
+            type="number"
             id="years_of_experience"
             name="years_of_experience"
             onChange={handleChange}

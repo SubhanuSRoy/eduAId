@@ -23,10 +23,9 @@ function AddClassInsights() {
   });
   const student = useSelector((state) => state.student.currentStudent);
 
-
   useEffect(() => {
-    document.title =  "Add Class Insights";
-  }, [])
+    document.title = "Add Class Insights";
+  }, []);
 
   const fetchStudentData = async () => {
     try {
@@ -171,30 +170,22 @@ function AddClassInsights() {
             <div className="text-3xl font-bold border-b-2 pb-1 mb-4">
               Classes
             </div>
-            {classes.map((classItem) => (
+            {classes.map((classItem, index) => (
               <div
                 key={classItem._id}
                 className="mb-4 p-4 bg-gradient-to-r from-prim to-secondary rounded-md text-black"
               >
-                <div className="text-xl font-semibold ">
+                {/* <div className="text-xl font-semibold ">
                   Class Topic:{" "}
                   <span className="font-normal text-gray-50">
                     {classItem.class_topic}
                   </span>
-                </div>
+                </div> */}
                 <div className="text-lg font-semibold">
                   Class Number:{" "}
-                  <span className="font-normal text-gray-50">
-                    {classItem.class_number}
-                  </span>
+                  <span className="font-normal text-gray-50">{index + 1}</span>
                 </div>
-                <div className="text-lg font-semibold">
-                  Updated At:{" "}
-                  <span className="font-normal text-gray-50">
-                    {classItem.updated_at}
-                  </span>
-                </div>
-                
+
                 {!classInsights[classItem._id] ? (
                   <form className="mt-2">
                     <input
