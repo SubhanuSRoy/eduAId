@@ -4,23 +4,27 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userActions } from "../../features/user/user-slice";
 
+import { useAuth0 } from "@auth0/auth0-react";
+
 const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [empID, setEmpID] = useState("");
+  //auth0
+  const { loginWithRedirect } = useAuth0();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(userActions.login({ empID: empID, userType: "Teacher" }));
-    navigate("/teacher/profile");
-  };
 
-  const handleAdminLogin = (e) => {
-    e.preventDefault();
-    dispatch(userActions.login({ empID: "admin", userType: "Admin" }));
-    navigate("/chat/converse");
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   dispatch(userActions.login({ empID: empID, userType: "Teacher" }));
+  //   navigate("/teacher/profile");
+  // };
+
+  // const handleAdminLogin = (e) => {
+  //   e.preventDefault();
+  //   dispatch(userActions.login({ empID: "admin", userType: "Admin" }));
+  //   navigate("/chat/converse");
+  // };
 
   return (
     <>
@@ -169,50 +173,26 @@ const SignIn = () => {
                 Sign In to eduAId
               </h2>
 
-              <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <label className="mb-2.5 block font-medium text-white">
-                    Teacher ID
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      value={empID}
-                      onChange={(e) => setEmpID(e.target.value)}
-                      placeholder="Enter your Teacher ID"
-                      className="w-full rounded-lg border  bg-transparent py-4 pl-6 pr-10 outline-none  focus-visible:shadow-none border-form-strokedark bg-form-input focus:border-prim"
-                    />
-
-                    <span className="absolute right-4 top-4">
-                      <BiUser className="h-6 w-6" />
-                    </span>
-                  </div>
-                </div>
+              <form >
+                
 
                 <div className="mb-5">
                   <button
                     type="submit"
+                    onClick={loginWithRedirect}
                     className="w-full cursor-pointer  text-medium rounded-lg border border-prim bg-white p-4 text-prim transition hover:bg-prim hover:text-white"
                   >
                     Sign In as Teacher
                   </button>
                 </div>
               </form>
-              <div className="mb-5">
-                <button
-                  className="w-full cursor-pointer text-medium  rounded-lg border border-prim bg-prim p-4 text-white transition hover:bg-opacity-90"
-                  onClick={handleAdminLogin}
-                >
-                  Sign In as an Admin
-                </button>
-              </div>
 
               <div className="mt-6 text-center">
                 <p>
                   Don’t have any account?{" "}
-                  <Link to="/auth/signup" className="text-prim">
-                    Sign Up
-                  </Link>
+                  <p className="text-prim">
+                    Sign Up directly above
+                  </p>
                 </p>
               </div>
             </div>

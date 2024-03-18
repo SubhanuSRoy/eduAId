@@ -3,24 +3,30 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import StudentCard from "../../Components/Student/StudentCard";
 
+//convex
+import { useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
+
 function ViewAllStudents() {
   const [searchTerm, setSearchTerm] = useState("");
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const teacher = useSelector((state) => state.teacher.currentTeacher);
+  const allStudents = useQuery(api?.students?.students?.getAllStudents);
 
   useEffect(() => {
-    document.title =  "View All Students";
-  }, [])
+    document.title = "View All Students";
+    console.log("fetching students:", students);
+  }, []);
 
   useEffect(() => {
     const fetchTopStudents = async () => {
-      console.log("Fetching top students...");
-
+      
       if (teacher) {
         console.log(teacher);
         try {
+          console.log("Fetching top students...");
           // Make an API call to get the top 10 students
           const response = await axios.get(
             process.env.REACT_APP_BACKEND_URL +
@@ -59,12 +65,13 @@ function ViewAllStudents() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 text-white">
         {loading ? (
           <p>Loading...</p>
-        ) : students.length === 0 ? (
+        ) : students?.length === 0 ? (
           <p>No students found.</p>
         ) : (
           // filter the students based on the search term, if search term is empty, show all students
+          students?.length > 0 &&
           students
-            .filter((student) =>
+            ?.filter((student) =>
               student?.name.toLowerCase().includes(searchTerm)
             )
             .map((student) => (

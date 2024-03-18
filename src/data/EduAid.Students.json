@@ -1,0 +1,172 @@
+[
+  {
+    "name": "Rehan",
+    "email": "rehan@gmail.com",
+    "grade": "8",
+    "course": "Python",
+    "teacher_id": "65be402b1aa875575fa07722",
+    "created_at": {
+      "date": "2024-02-03T13:43:49.891Z"
+    },
+    "updated_at": {
+      "date": "2024-02-03T13:43:49.891Z"
+    },
+    "study_plan": [
+      {
+        "class_no": "Class 1",
+        "topic": "Introduction to Python"
+      },
+      {
+        "class_no": "Class 2",
+        "topic": "Functions and Modules"
+      },
+      {
+        "class_no": "Class 3",
+        "topic": "Data Structures"
+      },
+      {
+        "class_no": "Class 4",
+        "topic": "Object-Oriented Programming"
+      },
+      {
+        "class_no": "Class 5",
+        "topic": "File Handling"
+      },
+      {
+        "class_no": "Class 6",
+        "topic": "Exception Handling"
+      },
+      {
+        "class_no": "Class 7",
+        "topic": "Advanced Topics"
+      },
+      {
+        "class_no": "Class 8",
+        "topic": "Project"
+      },
+      {
+        "class_no": "Class 9",
+        "topic": "Introduction to Web Development with Python"
+      },
+      {
+        "class_no": "Class 10",
+        "topic": "Introduction to Data Science with Python"
+      },
+      {
+        "class_no": "Class 11",
+        "topic": "Python Projects"
+      },
+      {
+        "class_no": "Class 12",
+        "topic": "Final Exam and Conclusion"
+      },
+      {
+        "class_no": "High School - Class 1",
+        "topic": "Introduction to Programming and Problem Solving"
+      },
+      {
+        "class_no": "High School - Class 2",
+        "topic": "Introduction to Variables and Data types in Programming"
+      },
+      {
+        "class_no": "High School - Class 3",
+        "topic": "Control Flow Statements in Programming"
+      },
+      {
+        "class_no": "High School - Class 4",
+        "topic": "Introduction to Lists and Tuples in Programming"
+      },
+      {
+        "class_no": "High School - Class 5",
+        "topic": "Introduction to Object-Oriented Programming Concepts"
+      },
+      {
+        "class_no": "College - Class 1",
+        "topic": "Introduction to Data Structures: Stacks and Queues"
+      },
+      {
+        "class_no": "College - Class 2",
+        "topic": "Introduction to Data Structures: Trees and Graphs"
+      },
+      {
+        "class_no": "College - Class 3",
+        "topic": "Introduction to Algorithms: Sorting, Searching, and Recursion"
+      },
+      {
+        "class_no": "College - Class 4",
+        "topic": "Introduction to Algorithms: Dynamic Programming and Greedy Algorithms"
+      },
+      {
+        "class_no": "College - Class 5",
+        "topic": "Introduction to Computer Graphics: 2D and 3D Graphics"
+      },
+      {
+        "class_no": "College - Class 6",
+        "topic": "Introduction to Computer Networks: Networking Protocols and Architectures"
+      }
+    ]
+  },
+  {
+    "name": "Rohe",
+    "email": "student@example.com",
+    "grade": "10",
+    "course": "Python",
+    "teacher_id": "65be402b1aa875575fa07722",
+    "created_at": {
+      "date": "2024-02-03T14:08:29.279Z"
+    },
+    "updated_at": {
+      "date": "2024-02-03T14:08:29.279Z"
+    },
+    "study_plan": [
+      {
+        "class_no": "Class 1",
+        "topic": "Introduction to Python"
+      },
+      {
+        "class_no": "Class 2",
+        "topic": "Python Basics"
+      },
+      {
+        "class_no": "Class 3",
+        "topic": "Control Structures"
+      },
+      {
+        "class_no": "Class 4",
+        "topic": "Functions"
+      },
+      {
+        "class_no": "Class 5",
+        "topic": "Modules and Packages"
+      },
+      {
+        "class_no": "Class 6",
+        "topic": "Object-Oriented Programming"
+      },
+      {
+        "class_no": "Class 7",
+        "topic": "File Handling"
+      },
+      {
+        "class_no": "Class 8",
+        "topic": "Data Structures"
+      },
+      {
+        "class_no": "Class 9",
+        "topic": "Exception Handling"
+      },
+      {
+        "class_no": "Class 10",
+        "topic": "Python Projects"
+      },
+      {
+        "class_no": "Class 11",
+        "topic": "Review and Q&A"
+      },
+      {
+        "class_no": "Class 12",
+        "topic": "Final Project Presentation"
+      }
+    ]
+  }
+]

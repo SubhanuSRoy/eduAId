@@ -5,13 +5,15 @@ import { userActions } from "../../features/user/user-slice";
 import { GrUser, GrUserAdmin } from "react-icons/gr";
 import { TbUserCircle, TbUserCog } from "react-icons/tb";
 
+import { useAuth0 } from "@auth0/auth0-react";
+import { teacherActions } from "../../features/teacher/teacher-slice";
+
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const dispatch = useDispatch();
-
-  const userType = useSelector((state) => state.user.userType);
-  const empID = useSelector((state) => state.user.empID);
+  const { user, logout } = useAuth0();
+  dispatch(userActions.addUser(user));
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
@@ -52,20 +54,17 @@ const DropdownUser = () => {
       >
         <span className="hidden  text-right lg:block">
           <span className="block text-sm font-medium  ">
-            ID: {empID}
+            Name: {user.nickname}
           </span>
-          <span className="block text-xs">TYPE: {userType}</span>
+          <span className="block text-xs">Email: {user.email}</span>
         </span>
 
         <span className="h-12 w-12 rounded-full p-2 ">
-          {userType === "Admin" ? (
-            <TbUserCog  className="w-full h-full stroke-primHover" />
-          ) : (
-            <TbUserCircle className="w-full h-full stroke-primHover" />
-          )}
+          {/* <TbUserCircle className="w-full h-full stroke-primHover" /> */}
+          <img src={user.picture} />
         </span>
 
-        {/* <svg
+        <svg
           className={`hidden fill-current sm:block ${
             dropdownOpen ? "rotate-180" : ""
           }`}
@@ -81,19 +80,19 @@ const DropdownUser = () => {
             d="M0.410765 0.910734C0.736202 0.585297 1.26384 0.585297 1.58928 0.910734L6.00002 5.32148L10.4108 0.910734C10.7362 0.585297 11.2638 0.585297 11.5893 0.910734C11.9147 1.23617 11.9147 1.76381 11.5893 2.08924L6.58928 7.08924C6.26384 7.41468 5.7362 7.41468 5.41077 7.08924L0.410765 2.08924C0.0853277 1.76381 0.0853277 1.23617 0.410765 0.910734Z"
             fill=""
           />
-        </svg> */}
+        </svg>
       </Link>
 
       {/* <!-- Dropdown Start --> */}
-      {/* <div
+      <div
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark ${
+        className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke  shadow-default dark:border-strokedark dark:bg-boxdark ${
           dropdownOpen === true ? "block" : "hidden"
         }`}
       >
-        <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
+        {/* <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
           <li>
             <div
               onClick={dispatch(userActions.setUserType("Branch Head"))}
@@ -102,24 +101,14 @@ const DropdownUser = () => {
               Branch Head
             </div>
           </li>
-          <li>
-            <div
-              onClick={dispatch(userActions.setUserType("Cluster Head"))}
-              className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-prim lg:text-base"
-            >
-              Cluster Head
-            </div>
-          </li>
-          <li>
-            <div
-              onClick={dispatch(userActions.setUserType("Circle Head"))}
-              className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-prim lg:text-base"
-            >
-              Circle Head
-            </div>
-          </li>
-        </ul>
-        <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-prim lg:text-base" onClick={dispatch(userActions.logout())}>
+          
+        </ul> */}
+        <button
+          onClick={() =>
+            logout({ logoutParams: { returnTo: window.location.origin } })
+          }
+          className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-prim lg:text-base"
+        >
           <svg
             className="fill-current"
             width="22"
@@ -139,7 +128,7 @@ const DropdownUser = () => {
           </svg>
           Log Out
         </button>
-      </div> */}
+      </div>
       {/* <!-- Dropdown End --> */}
     </div>
   );

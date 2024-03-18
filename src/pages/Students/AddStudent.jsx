@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { studentActions } from "../../features/student/student-slice";
 import axios from "axios";
+import { useMutation } from "convex/react";
+import { api } from "../../convex/_generated/api";
 
 function AddStudent() {
   const dispatch = useDispatch();
 
   const teacher = useSelector((state) => state.teacher.currentTeacher);
+  const addNewStudent = useMutation(api.students.students.addNewStudent);
 
   const [loading, setLoading] = useState(false);
 
@@ -15,11 +18,12 @@ function AddStudent() {
     email: "",
     grade: "",
     course: "",
+    teacher_id: "",
   });
 
   useEffect(() => {
-    document.title =  "Add Student";
-  }, [])
+    document.title = "Add Student";
+  }, []);
 
   // check if teacher exists then add the teacher ID to the form data
 
@@ -54,9 +58,11 @@ function AddStudent() {
       );
       setLoading(false);
       const newStudent = response.data;
-      dispatch(studentActions.addstudent(newStudent));
+      formData.teacher_id = teacher._id;
+      dispatch(studentActions.addStudent(newStudent));
+      const newStudentId = await addNewStudent(formData);
       setLoading(false);
-      console.log("Student added successfully:", newStudent);
+      console.log("Student added successfully:", newStudentId);
 
       // Clear the form after successful submission
       setFormData({

@@ -275,21 +275,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   Handwritten Notes
                 </NavLink>
               </li>
-              <li>
-                <a
-                  href="https://eduaid.streamlit.app/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-semibold text-gray-50 duration-300 ease-in-out hover:bg-primHover dark:hover:bg-meta-4 ${
-                    pathname.includes("settings") &&
-                    "bg-primHover dark:bg-meta-4"
-                  }`}
-                >
-                  {/* ... (unchanged) */}
-                  <FaVideo />
-                  Analyse Class Video
-                </a>
-              </li>
+              
               
             </ul>
           </div>
